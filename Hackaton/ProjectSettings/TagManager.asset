@@ -9,9 +9,6 @@ TagManager:
   - Sturdy
   - GroundEnemy
   - FlyEnemy
-  - PauseUI
-  - QuitUI
-  - Fader
   layers:
   - Default
   - TransparentFX
