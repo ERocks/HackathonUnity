@@ -19905,6 +19905,11 @@ Prefab:
       propertyPath: jumpForceY
       value: 400
       objectReference: {fileID: 0}
+    - target: {fileID: 50641762691530932, guid: 035244ad6e6ad144ba6b23e3e258ece2,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 035244ad6e6ad144ba6b23e3e258ece2, type: 2}
   m_IsPrefabAsset: 0

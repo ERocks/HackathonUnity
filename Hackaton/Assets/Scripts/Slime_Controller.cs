@@ -12,6 +12,7 @@ public class Slime_Controller : MonoBehaviour
     public int direction = 1;
     public int secondsToJump = 3;
     public int secondsToShoot = 0;
+    public int m_EnemyDamage = 50;
     public GameObject bulet;
     public LayerMask groundLayer;
     public Transform groundCheck;
@@ -75,7 +76,7 @@ public class Slime_Controller : MonoBehaviour
         secondsJump = (int)timeToJump % 60;
         secondsShoot = (int)timeToShoot % 60;
         overCircle = this.transform.position;
-        overCircle.x += 4 * direction;
+        overCircle.x += (jumpForceX / 25) * direction;
         overCircle.y -= 0.5f;
         //Debug.Log("Overlap" + Physics2D.OverlapCircle(overCircle, 0.5f).tag);
         if (secondsJump >= secondsToJump && grounded && type == EnemyType.jumping && secondsToJump > 1)
@@ -106,15 +107,15 @@ public class Slime_Controller : MonoBehaviour
         }
 
     }
-    /**
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Ground")
-        {
-            grounded = true;
-        }
 
-    }*/
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        IDamageable dam = collision.gameObject.GetComponent<IDamageable>();
+        if (dam != null)
+        {
+            dam.DoDamage(m_EnemyDamage);
+        }
+    }
 
     void jump()
     {
