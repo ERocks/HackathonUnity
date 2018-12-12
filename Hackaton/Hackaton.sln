@@ -1,13 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackaton", "Assembly-CSharp.csproj", "{FDA0B737-596F-F2F1-DA9E-20D4B3919C70}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{FDA0B737-596F-F2F1-DA9E-20D4B3919C70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackaton", "Assembly-CSharp-firstpass.csproj", "{F13650CA-79ED-78A7-6C21-070EC4510D45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{F13650CA-79ED-78A7-6C21-070EC4510D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackaton", "Assembly-CSharp-Editor-firstpass.csproj", "{3C6F84D2-B1BC-B878-CE7A-AEC9B5467321}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackaton", "Assembly-CSharp-Editor.csproj", "{B3195626-A6BF-6946-FF2D-86B7F4B704D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor-firstpass", "Assembly-CSharp-Editor-firstpass.csproj", "{3C6F84D2-B1BC-B878-CE7A-AEC9B5467321}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{B3195626-A6BF-6946-FF2D-86B7F4B704D2}"
 EndProject
@@ -36,5 +34,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

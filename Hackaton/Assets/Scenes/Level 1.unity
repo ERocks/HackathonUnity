@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5800846, g: 0.61855984, b: 0.725035, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.57986075, g: 0.61855817, b: 0.7253937, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23466,6 +23466,11 @@ Prefab:
     - target: {fileID: 1605171615436094, guid: 035244ad6e6ad144ba6b23e3e258ece2, type: 2}
       propertyPath: m_TagString
       value: GroundEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 114816974566806154, guid: 035244ad6e6ad144ba6b23e3e258ece2,
+        type: 2}
+      propertyPath: m_EnemyDamage
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 035244ad6e6ad144ba6b23e3e258ece2, type: 2}
