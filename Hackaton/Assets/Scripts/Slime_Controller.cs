@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime_Controller : MonoBehaviour
+public class Slime_Controller : MonoBehaviour, IDamageable, IMovable
 {
 
     public float jumpForceY = 400;
     public float jumpForceX = 400;
+    public float clickForceY = 300;
+    public float clickForceX = 300;
     public float shootForce = 200;
     public bool grounded;
     public int direction = 1;
     public int secondsToJump = 3;
     public int secondsToShoot = 0;
+    public int m_EnemyDamage = 50;
     public GameObject bulet;
     public LayerMask groundLayer;
     public Transform groundCheck;
@@ -55,6 +58,7 @@ public class Slime_Controller : MonoBehaviour
     {
         
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, .2f, groundLayer);
+        grounded = false;
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
@@ -75,7 +79,7 @@ public class Slime_Controller : MonoBehaviour
         secondsJump = (int)timeToJump % 60;
         secondsShoot = (int)timeToShoot % 60;
         overCircle = this.transform.position;
-        overCircle.x += 4 * direction;
+        overCircle.x += (jumpForceX / 25) * direction;
         overCircle.y -= 0.5f;
         //Debug.Log("Overlap" + Physics2D.OverlapCircle(overCircle, 0.5f).tag);
         if (secondsJump >= secondsToJump && grounded && type == EnemyType.jumping && secondsToJump > 1)
@@ -106,15 +110,15 @@ public class Slime_Controller : MonoBehaviour
         }
 
     }
-    /**
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Ground")
-        {
-            grounded = true;
-        }
 
-    }*/
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        IDamageable dam = collision.gameObject.GetComponent<IDamageable>();
+        if (dam != null)
+        {
+            dam.DoDamage(m_EnemyDamage);
+        }
+    }
 
     void jump()
     {
@@ -140,4 +144,19 @@ public class Slime_Controller : MonoBehaviour
         Destroy(shoot, 2.0f);
     }
 
+    public void DoDamage(int amount)
+    {
+        if (amount > 0)
+        {
+        }
+    }
+
+    public void Move(Vector3 direction)
+    {
+        if (!grounded)
+        {
+            body.AddForce(transform.up * direction.y * clickForceY);
+            body.AddForce(transform.right * direction.x * clickForceX);
+        }
+    }
 }
