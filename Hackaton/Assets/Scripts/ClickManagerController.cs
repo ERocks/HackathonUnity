@@ -187,6 +187,13 @@ public class ClickManagerController : MonoBehaviour
             direction = direction.normalized;
             direction *= minForceMagnitude;
         }
+		
+		// Enemigos que les afectan los tirones
+            foreach (GameObject groundenemy in groundenemies)
+            {
+                groundenemy.SendMessage("Move", direction);
+            }
+            yield return null;
 
         float path = direction.magnitude;
 
@@ -196,12 +203,12 @@ public class ClickManagerController : MonoBehaviour
             float time = Time.deltaTime;
             Vector3 _direction = direction * time * speed;
 
-            // Enemigos que les afectan los tirones
+            /*// Enemigos que les afectan los tirones
             foreach (GameObject groundenemy in groundenemies)
             {
                 groundenemy.SendMessage("Move", _direction);
             }
-            yield return null;
+            yield return null;*/
 
             // Plataformas
             foreach (GameObject platform in platforms)
