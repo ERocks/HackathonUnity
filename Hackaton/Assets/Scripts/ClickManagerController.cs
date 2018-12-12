@@ -29,21 +29,21 @@ public class ClickManagerController : MonoBehaviour
         else if (instance != this)              // SOLO PUEDE SOBREVIVIR UNOOOOOOOO
             Destroy(gameObject);                // MUAHAHAHAHA
 
-        DontDestroyOnLoad(gameObject);
+      //  DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
-        if (platforms == null)              // No se puede hacer en el 'Awake' porque no hay garantias de que todas las
+   //     if (platforms == null)              // No se puede hacer en el 'Awake' porque no hay garantias de que todas las
             platforms = GameObject.FindGameObjectsWithTag("Platform");      // plataformas se hayan inicializado aun
 
-        if (buttons == null)
+       // if (buttons == null)
             buttons = GameObject.FindGameObjectsWithTag("Sturdy");
 
-        if (flyenemies == null)
+     //   if (flyenemies == null)
             flyenemies = GameObject.FindGameObjectsWithTag("FlyEnemy");
 
-        if (groundenemies == null)
+     //   if (groundenemies == null)
             groundenemies = GameObject.FindGameObjectsWithTag("GroundEnemy");
     }
 

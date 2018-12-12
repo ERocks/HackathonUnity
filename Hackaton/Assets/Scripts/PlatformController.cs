@@ -57,82 +57,85 @@ public class PlatformController : MonoBehaviour, IMovable {
     
     public void Move(Vector3 direction)
     {
-        if (localNodes.Length > 1)
+        if (Time.timeScale != 0)
         {
-            Vector3 next, previous;
+            if (localNodes.Length > 1)
+            {
+                Vector3 next, previous;
 
-            // Comprueba en que punto de la trayectoria esta para asi
-            // ver si puede avanzar en un determinado sentido o no
-            if (i == 0)     // Esta en el primer nodo
-            {
-                next = localNodes[(int)i + 1] - localNodes[(int)i];
-                previous = Vector3.zero;
-            }
-            else if (i == (localNodes.Length - 1))       // Esta en el ultimo
-            {
-                next = Vector3.zero;
-                previous = localNodes[(int)i - 1] - localNodes[(int)i];
-            }
-            else if ((i - (int)i) != 0)       // esta entre dos
-            {
-                next = localNodes[(int)i + 1];
-                previous = localNodes[(int)i];
-            }
-            else
-            {
-                next = localNodes[(int)i + 1] - localNodes[(int)i];
-                previous = localNodes[(int)i - 1] - localNodes[(int)i];
-            }
-            
-            // La direccion que marca el raton esta "permitida".
-            // Es decir, conduce hacia uno de los nodos
-            if (direction.normalized == next.normalized)
-            {
-                m_t += m_speed * direction.magnitude;
-                if (m_t > 1)
+                // Comprueba en que punto de la trayectoria esta para asi
+                // ver si puede avanzar en un determinado sentido o no
+                if (i == 0)     // Esta en el primer nodo
                 {
-                    m_t = 0;
-                    i = (int)i + 1;
-                    transform.position = transform.TransformPoint(localNodes[(int)i]);
+                    next = localNodes[(int)i + 1] - localNodes[(int)i];
+                    previous = Vector3.zero;
+                }
+                else if (i == (localNodes.Length - 1))       // Esta en el ultimo
+                {
+                    next = Vector3.zero;
+                    previous = localNodes[(int)i - 1] - localNodes[(int)i];
+                }
+                else if ((i - (int)i) != 0)       // esta entre dos
+                {
+                    next = localNodes[(int)i + 1];
+                    previous = localNodes[(int)i];
                 }
                 else
                 {
-                    i = ((int)i + ((int)i + 1)) / 2.0f;
-                    transform.position = Vector3.Lerp(transform.TransformPoint(localNodes[(int)i]),
-                        transform.TransformPoint(localNodes[(int)i + 1]), m_t);
+                    next = localNodes[(int)i + 1] - localNodes[(int)i];
+                    previous = localNodes[(int)i - 1] - localNodes[(int)i];
                 }
 
-                for (int i = 0; i < localNodes.Length; ++i)
+                // La direccion que marca el raton esta "permitida".
+                // Es decir, conduce hacia uno de los nodos
+                if (direction.normalized == next.normalized)
                 {
-                    localNodes[i] = transform.InverseTransformPoint(saveNodes[i]);
-                }
-            }
-            else if(direction.normalized == previous.normalized)
-            {
-                if (m_t == 0)
-                {
-                    m_t = 1 - m_speed * direction.magnitude;
-                    i = ((int)i + ((int)i - 1)) / 2.0f;
-                    transform.position = Vector3.Lerp(transform.TransformPoint(localNodes[(int)i]),
-                        transform.TransformPoint(localNodes[(int)i + 1]), m_t);
-                }
-                else if (m_t < 0)
-                {
-                    m_t = 0;
-                    i = (int)i;
-                    transform.position = transform.TransformPoint(localNodes[(int)i]);
-                }
-                else
-                {
-                    m_t -= m_speed * direction.magnitude;
-                    i = ((int)i + ((int)i - 1)) / 2.0f;
-                    transform.position = Vector3.Lerp(transform.TransformPoint(localNodes[(int)i]),
-                        transform.TransformPoint(localNodes[(int)i + 1]), m_t);
-                }
+                    m_t += m_speed * direction.magnitude;
+                    if (m_t > 1)
+                    {
+                        m_t = 0;
+                        i = (int)i + 1;
+                        transform.position = transform.TransformPoint(localNodes[(int)i]);
+                    }
+                    else
+                    {
+                        i = ((int)i + ((int)i + 1)) / 2.0f;
+                        transform.position = Vector3.Lerp(transform.TransformPoint(localNodes[(int)i]),
+                            transform.TransformPoint(localNodes[(int)i + 1]), m_t);
+                    }
 
-                for (int i = 0; i < localNodes.Length; ++i)
+                    for (int i = 0; i < localNodes.Length; ++i)
+                    {
+                        localNodes[i] = transform.InverseTransformPoint(saveNodes[i]);
+                    }
+                }
+                else if (direction.normalized == previous.normalized)
                 {
-                    localNodes[i] = transform.InverseTransformPoint(saveNodes[i]);
+                    if (m_t == 0)
+                    {
+                        m_t = 1 - m_speed * direction.magnitude;
+                        i = ((int)i + ((int)i - 1)) / 2.0f;
+                        transform.position = Vector3.Lerp(transform.TransformPoint(localNodes[(int)i]),
+                            transform.TransformPoint(localNodes[(int)i + 1]), m_t);
+                    }
+                    else if (m_t < 0)
+                    {
+                        m_t = 0;
+                        i = (int)i;
+                        transform.position = transform.TransformPoint(localNodes[(int)i]);
+                    }
+                    else
+                    {
+                        m_t -= m_speed * direction.magnitude;
+                        i = ((int)i + ((int)i - 1)) / 2.0f;
+                        transform.position = Vector3.Lerp(transform.TransformPoint(localNodes[(int)i]),
+                            transform.TransformPoint(localNodes[(int)i + 1]), m_t);
+                    }
+
+                    for (int i = 0; i < localNodes.Length; ++i)
+                    {
+                        localNodes[i] = transform.InverseTransformPoint(saveNodes[i]);
+                    }
                 }
             }
         }

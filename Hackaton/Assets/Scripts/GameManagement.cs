@@ -22,10 +22,14 @@ public class GameManagement : MonoBehaviour {
 
     void Start()
     {
-        img.color = new Color(0, 0, 0, 1);
+        GetSceneObjects();
+
         StartCoroutine(FadeImage(true));
         uiStarPos = new Vector3(0,1600,0);
         uiVisiblePos = new Vector3(0,0,0);
+
+
+        img.color = new Color(0, 0, 0, 1);
     }
 
     void Update()
@@ -73,8 +77,9 @@ public class GameManagement : MonoBehaviour {
 
     public void Restart(string sceneName) //Restart the game, reset any object positions to their start positions, and reset the timer.
     {
+        Scene m_Scene = SceneManager.GetActiveScene();
+        chosenScene = m_Scene.name;
         StartCoroutine(FadeImage(false));
-        chosenScene = sceneName;
         Time.timeScale = 1;
     }
 
@@ -117,10 +122,19 @@ public class GameManagement : MonoBehaviour {
 
                 if (i >= 0.99)
                     SceneManager.LoadScene(chosenScene);
+                    GetSceneObjects();
                     yield return null;
             }
         }
     }
     #endregion
+
+    void GetSceneObjects()
+    {
+        playerChar = GameObject.FindGameObjectWithTag("Player");
+        pauseUI = GameObject.FindGameObjectWithTag("PauseUI");
+        quitUI = GameObject.FindGameObjectWithTag("QuitUI");
+        img = GameObject.FindGameObjectWithTag("Fader").GetComponent<Image>();
+    }
 
 }
