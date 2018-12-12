@@ -11,13 +11,13 @@ public class GameManagement : MonoBehaviour {
 
     public Vector2 startPos;
 
-    public GameObject playerChar;
-    public GameObject pauseUI, quitUI;
+    GameObject playerChar;
+    GameObject pauseUI, quitUI;
 
     Vector3 uiStarPos;
     Vector3 uiVisiblePos;
 
-    public Image img;
+    Image img;
     string chosenScene;
 
     void Start()
