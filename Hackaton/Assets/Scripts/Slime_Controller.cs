@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime_Controller : MonoBehaviour
+public class Slime_Controller : MonoBehaviour, IDamageable, IMovable
 {
 
     public float jumpForceY = 400;
     public float jumpForceX = 400;
+    public float clickForceY = 300;
+    public float clickForceX = 300;
     public float shootForce = 200;
     public bool grounded;
     public int direction = 1;
@@ -56,6 +58,7 @@ public class Slime_Controller : MonoBehaviour
     {
         
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, .2f, groundLayer);
+        grounded = false;
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
@@ -141,4 +144,19 @@ public class Slime_Controller : MonoBehaviour
         Destroy(shoot, 2.0f);
     }
 
+    public void DoDamage(int amount)
+    {
+        if (amount > 0)
+        {
+        }
+    }
+
+    public void Move(Vector3 direction)
+    {
+        if (!grounded)
+        {
+            body.AddForce(transform.up * direction.y * clickForceY);
+            body.AddForce(transform.right * direction.x * clickForceX);
+        }
+    }
 }
