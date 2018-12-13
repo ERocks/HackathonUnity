@@ -131,6 +131,14 @@ public class Slime_Controller : MonoBehaviour, IDamageable, IMovable
 
             };
         }
+        if (other.tag == "Spikes")
+        {
+            IDamageable dam = other.gameObject.GetComponent<IDamageable>();
+            if (dam != null)
+            {
+                dam.DoDamage(m_EnemyDamage);
+            }
+        }
 
     }
 
@@ -146,11 +154,7 @@ public class Slime_Controller : MonoBehaviour, IDamageable, IMovable
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        IDamageable dam = collision.gameObject.GetComponent<IDamageable>();
-        if (dam != null)
-        {
-            dam.DoDamage(m_EnemyDamage);
-        }
+
     }
 
     void jump()

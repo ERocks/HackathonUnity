@@ -63,6 +63,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable {
         if (other.tag == "Spikes")
             DoDamage(1);
     }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "GroundEnemy")
+            DoDamage(4);
+    }
 
     public void DoDamage(int amount)
     {

@@ -190,6 +190,7 @@ public class ClickManagerController : MonoBehaviour
         // Enemigos que les afectan los tirones
         foreach (GameObject groundenemy in groundenemies)
         {
+            if (groundenemy.gameObject.activeInHierarchy == true)
             groundenemy.SendMessage("Move", direction * speed);
         }
         yield return null;
