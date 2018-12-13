@@ -14,13 +14,13 @@ public class ClickManagerController : MonoBehaviour
 
     // Cuanto hay que arrastrar el raton
     public float minForce = 0.5f;
-    public float medForce = 2;
-    public float maxForce = 3.5f;
+    public float medForce = 3;
+    public float maxForce = 6;
 
     // Cuanto aumenta segun lo que has arrastrado
-    public float minForceMagnitude = 1;
-    public float medForceMagnitude = 2;
-    public float maxForceMagnitude = 3;
+    public float minForceMagnitude = 0.3f;
+    public float medForceMagnitude = 0.5f;
+    public float maxForceMagnitude = 1;
 
     void Awake()
     {
@@ -49,33 +49,35 @@ public class ClickManagerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-            StartCoroutine("constantGravity");
-        else if (Input.GetMouseButtonUp(1))
-            StopCoroutine("constantGravity");
-
-        /* Boton izquierdo comprueba si ha pulsado un boton
-        * o bien tiene que activar todas las plataformas movibles
-        * */
-        if (Input.GetMouseButtonDown(0))
+        if (Time.timeScale != 0)        // Para evitar que se ejecute durante pausa
         {
-            bool activatedButton = false;
-            int i;
-            for (i = 0; (i < buttons.Length) && (activatedButton != true); ++i)
-            {
-                if (buttons[i].GetComponent<PlatformController>().isClicked == true)
-                    activatedButton = true;
-            }
-            --i;    // Si no al salir del bucle aumenta uno extra que no queremos
+            if (Input.GetMouseButtonDown(1))
+                StartCoroutine("constantGravity");
+            else if (Input.GetMouseButtonUp(1))
+                StopCoroutine("constantGravity");
 
-            if (activatedButton)
+            /* Boton izquierdo comprueba si ha pulsado un boton
+            * o bien tiene que activar todas las plataformas movibles
+            * */
+            if (Input.GetMouseButtonDown(0))
             {
-                StartCoroutine(buttonGravity(buttons[i]));
-            }
-            StartCoroutine(variableGravity());
+                bool activatedButton = false;
+                int i;
+                for (i = 0; (i < buttons.Length) && (activatedButton != true); ++i)
+                {
+                    if (buttons[i].GetComponent<PlatformController>().isClicked == true)
+                        activatedButton = true;
+                }
+                --i;    // Si no al salir del bucle aumenta uno extra que no queremos
 
+                if (activatedButton)
+                {
+                    StartCoroutine(buttonGravity(buttons[i]));
+                }
+
+                StartCoroutine(variableGravity());
+            }
         }
-
     }
 
     IEnumerator constantGravity()
@@ -173,20 +175,24 @@ public class ClickManagerController : MonoBehaviour
         {
             speed = maxForceMagnitude;
             direction = direction.normalized;
-            direction *= maxForceMagnitude;
         }
         else if (direction.magnitude > medForce)
         {
             speed = medForceMagnitude;
             direction = direction.normalized;
-            direction *= medForceMagnitude;
         }
         else
         {
             speed = minForceMagnitude;
             direction = direction.normalized;
-            direction *= minForceMagnitude;
         }
+        
+        // Enemigos que les afectan los tirones
+        foreach (GameObject groundenemy in groundenemies)
+        {
+            groundenemy.SendMessage("Move", direction * speed);
+        }
+        yield return null;
 
         float path = direction.magnitude;
 
@@ -194,14 +200,7 @@ public class ClickManagerController : MonoBehaviour
         while (path > 0)
         {
             float time = Time.deltaTime;
-            Vector3 _direction = direction * time * speed;
-
-            // Enemigos que les afectan los tirones
-            foreach (GameObject groundenemy in groundenemies)
-            {
-                groundenemy.SendMessage("Move", _direction);
-            }
-            yield return null;
+            Vector3 _direction = direction * speed * time;
 
             // Plataformas
             foreach (GameObject platform in platforms)

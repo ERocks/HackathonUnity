@@ -62,7 +62,7 @@ public class PlatformController : MonoBehaviour, IMovable {
             if (localNodes.Length > 1)
             {
                 Vector3 next, previous;
-
+                
                 // Comprueba en que punto de la trayectoria esta para asi
                 // ver si puede avanzar en un determinado sentido o no
                 if (i == 0)     // Esta en el primer nodo
@@ -118,21 +118,29 @@ public class PlatformController : MonoBehaviour, IMovable {
                         transform.position = Vector3.Lerp(transform.TransformPoint(localNodes[(int)i]),
                             transform.TransformPoint(localNodes[(int)i + 1]), m_t);
                     }
-                    else if (m_t < 0)
+                    /*else if (m_t < 0)
                     {
                         m_t = 0;
                         i = (int)i;
                         transform.position = transform.TransformPoint(localNodes[(int)i]);
-                    }
+                    }*/
                     else
                     {
                         m_t -= m_speed * direction.magnitude;
-                        i = ((int)i + ((int)i - 1)) / 2.0f;
+                        i = ((int)i + ((int)i + 1)) / 2.0f;
                         transform.position = Vector3.Lerp(transform.TransformPoint(localNodes[(int)i]),
                             transform.TransformPoint(localNodes[(int)i + 1]), m_t);
                     }
+                    
+                    // Actualiza la 'i' para que reconozca que se encuentra en un nodo
+                    // y de paso pone 'm_t' a cero
+                    if (m_t < 0)
+                    {
+                        m_t = 0;
+                        i = (int)i;
+                    }
 
-                    for (int i = 0; i < localNodes.Length; ++i)
+                        for (int i = 0; i < localNodes.Length; ++i)
                     {
                         localNodes[i] = transform.InverseTransformPoint(saveNodes[i]);
                     }
