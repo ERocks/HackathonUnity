@@ -9,7 +9,11 @@ TagManager:
   - Sturdy
   - GroundEnemy
   - FlyEnemy
+<<<<<<< HEAD
   - Weapon
+=======
+  - Spikes
+>>>>>>> ManuBranch2
   layers:
   - Default
   - TransparentFX
