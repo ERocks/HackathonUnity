@@ -10,6 +10,8 @@ public class Slime_Controller : MonoBehaviour, IDamageable, IMovable
     public float clickForceY = 300;
     public float clickForceX = 300;
     public float shootForce = 200;
+    public float boomerangThreshold = 1f;
+    public float jumpOverThreshold = 1.5f;
     public bool grounded;
     public int direction = 1;
     public int secondsToJump = 3;
@@ -104,11 +106,25 @@ public class Slime_Controller : MonoBehaviour, IDamageable, IMovable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Weapon" && grounded)
+        if (other.tag == "Weapon" && grounded && type == EnemyType.stand)
         {
-            jump();
+            if ((other.transform.position.y - transform.position.y) < boomerangThreshold)
+            {
+                jump();
+
+            };
         }
 
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.tag == "Player" && grounded && type == EnemyType.stand)
+        {
+            if ((other.transform.position.y - transform.position.y) > jumpOverThreshold) {
+                jump();
+
+            };
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -122,8 +138,9 @@ public class Slime_Controller : MonoBehaviour, IDamageable, IMovable
 
     void jump()
     {
-        body.AddForce(transform.up * jumpForceY);
-        body.AddForce(transform.right * jumpForceX * direction);
+        float gravityMultiplier = Mathf.Sqrt( body.gravityScale);
+        body.AddForce(transform.up * jumpForceY * gravityMultiplier);
+        body.AddForce(transform.right * jumpForceX * direction * gravityMultiplier);
         grounded = false;
     }
 
@@ -153,10 +170,11 @@ public class Slime_Controller : MonoBehaviour, IDamageable, IMovable
 
     public void Move(Vector3 direction)
     {
+        float gravityMultiplier = Mathf.Sqrt(body.gravityScale);
         if (!grounded)
         {
-            body.AddForce(transform.up * direction.y * clickForceY);
-            body.AddForce(transform.right * direction.x * clickForceX);
+            body.AddForce(transform.up * direction.y * clickForceY * gravityMultiplier);
+            body.AddForce(transform.right * direction.x * clickForceX * gravityMultiplier);
         }
     }
 }

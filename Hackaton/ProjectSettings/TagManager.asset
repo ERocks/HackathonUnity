@@ -9,7 +9,11 @@ TagManager:
   - Sturdy
   - GroundEnemy
   - FlyEnemy
+<<<<<<< HEAD
   - Spikes
+=======
+  - Weapon
+>>>>>>> fa24ff8722b7603a58acb13d0fd610a242d43352
   layers:
   - Default
   - TransparentFX
