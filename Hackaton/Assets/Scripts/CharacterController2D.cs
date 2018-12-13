@@ -16,6 +16,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
     [SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
+    [SerializeField] private GameObject m_PlayerMesh;                // A collider that will be disabled when crouching
 
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
@@ -142,6 +143,7 @@ public class CharacterController2D : MonoBehaviour
             if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
             {
                 crouch = true;
+               
             }
         }
 
@@ -156,6 +158,9 @@ public class CharacterController2D : MonoBehaviour
                 {
                     m_wasCrouching = true;
                     OnCrouchEvent.Invoke(true);
+                    m_PlayerMesh.transform.localScale = new Vector3(1, 0.6f, 1);
+                    m_PlayerMesh.transform.localPosition = new Vector3(0, -0.5f, 0);
+
                 }
 
                 // Reduce the speed by the crouchSpeed multiplier
@@ -175,6 +180,8 @@ public class CharacterController2D : MonoBehaviour
                 {
                     m_wasCrouching = false;
                     OnCrouchEvent.Invoke(false);
+                    m_PlayerMesh.transform.localScale = new Vector3(1, 1, 1);
+                    m_PlayerMesh.transform.localPosition = new Vector3(0, -0.1f, 0);
                 }
             }
 

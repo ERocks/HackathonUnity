@@ -9,6 +9,7 @@ TagManager:
   - Sturdy
   - GroundEnemy
   - FlyEnemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

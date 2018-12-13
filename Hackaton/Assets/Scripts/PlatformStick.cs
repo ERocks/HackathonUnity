@@ -16,17 +16,17 @@ public class PlatformStick : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
+        if (!other.isTrigger && (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy"))
         {
             other.transform.parent = transform;
 
         }
+        
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
+        if (!other.isTrigger && (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy"))
         {
             other.transform.parent = null;
 
