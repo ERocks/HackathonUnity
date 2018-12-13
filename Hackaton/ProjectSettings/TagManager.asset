@@ -9,6 +9,7 @@ TagManager:
   - Sturdy
   - GroundEnemy
   - FlyEnemy
+  - Spikes
   layers:
   - Default
   - TransparentFX
