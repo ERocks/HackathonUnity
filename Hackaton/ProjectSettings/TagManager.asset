@@ -6,14 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Platform
-  - Sturdy
   - GroundEnemy
-  - FlyEnemy
-<<<<<<< HEAD
-  - Weapon
-=======
+  - Sturdy
   - Spikes
->>>>>>> ManuBranch2
+  - Weapon
+  - FlyEnemy
   layers:
   - Default
   - TransparentFX
@@ -23,13 +20,13 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
-  - Player
-  - Terrain
-  - Platform
-  - Enemy
-  - Boomerang
-  - Trap
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

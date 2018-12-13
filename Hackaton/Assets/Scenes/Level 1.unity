@@ -2844,35 +2844,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4310614304489658, guid: 5cbae0602ce9acf41a98fda3a353569a,
     type: 2}
   m_PrefabInternal: {fileID: 225818757}
---- !u!1 &226683778 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1193331726638506, guid: 81b309bfae4a530408c323fd368c87ce,
-    type: 2}
-  m_PrefabInternal: {fileID: 1895712757}
---- !u!114 &226683782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 226683778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27e63be8ef979164aa85d7094c3706aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RotSpeed: 1500
---- !u!114 &226683783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 226683778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e415c76896d194fbd408ca93152387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BoomerangForce: 0.5
 --- !u!1001 &226888674
 Prefab:
   m_ObjectHideFlags: 0
@@ -23622,29 +23593,6 @@ Prefab:
     - target: {fileID: 4605332556377054, guid: 81b309bfae4a530408c323fd368c87ce, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114754282769742674, guid: 81b309bfae4a530408c323fd368c87ce,
-        type: 2}
-      propertyPath: deathparticle
-      value: 
-      objectReference: {fileID: 21300000, guid: 02d8b4cc18e3a7c40843b9a8b18001c9,
-        type: 3}
-    - target: {fileID: 50065481229543978, guid: 81b309bfae4a530408c323fd368c87ce,
-        type: 2}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267421825368924, guid: 81b309bfae4a530408c323fd368c87ce, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267421825368924, guid: 81b309bfae4a530408c323fd368c87ce, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1193331726638506, guid: 81b309bfae4a530408c323fd368c87ce, type: 2}
-      propertyPath: m_TagString
-      value: Weapon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81b309bfae4a530408c323fd368c87ce, type: 2}
